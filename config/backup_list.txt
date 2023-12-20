@@ -1,0 +1,3 @@
+ /complete/path/to/Source/directory_1   /complete/path/where_you_want_to_backup_directory_1/ie_destination_1
+ /complete/path/to/Source/directory_2   /complete/path/where_you_want_to_backup_directory_1/ie_destination_2
+ /complete/path/to/Source/directory_3   /complete/path/where_you_want_to_backup_directory_1/ie_destination_3
