@@ -1,4 +1,5 @@
 
+
 <a  href="https://www.buymeacoffee.com/ajayagrawal">![safesync](https://github.com/ajayagrawalgit/SafeSync/assets/94609372/2667b8ae-72f8-42cd-8adf-7bb90af30a72)</a>
 
 <p align="center">
@@ -233,7 +234,8 @@ By following these steps, you can easily locate and access the log files generat
        "create_dirs": "true",
        "log_destination": "/path/to/logs/safesync.log",
        "rsync_log": "/path/to/logs/rsync.log",
-       "python_command": "python3"
+       "python_command": "python3",
+       "secure_backup_interval": 3600
    }
    ```
 
@@ -257,9 +259,11 @@ By following these steps, you can easily locate and access the log files generat
 
    - **python_command:**
      Enter the command used to run Python scripts on your machine. Typically, this is
+	 either `python` or `python3`. Ensure accurate representation based on your system configuration.
 
- either `python` or `python3`. Ensure accurate representation based on your system configuration.
-
+   - **secure_backup_interval:**
+     This variable should be entered in _seconds_ which specifies that if the source file is changed within this time since the script has started running, SafeSync will rename the same file in the destination path as backup and copy the fresh file with the original name to the destination. By default, it's 3600 seconds i.e. 1 hour.
+     
 <br>
 
 4. **Configure `backup_list.txt`:**
