@@ -67,3 +67,50 @@ path_exists() {
         echo "[ $(date) ] - ( WARNING ) : $path_to_check is an Invalid Path ✗" | log_this
     fi
 }
+
+
+
+function secure_backup() {
+    local source_path="$1"
+    local destination_path="$2"
+    local secure_backup_interval="$3"
+
+    if [ -d "$source_path" ]; then
+        local current_time=$(date +%s)
+
+        # Determine the appropriate stat command based on the platform
+        local stat_command="stat"
+        if [[ "$(uname)" == "Darwin" ]]; then
+            stat_command="stat -f %m"
+        fi
+
+        # Iterate over all files in the source directory
+        for source_file in "$source_path"/*; do
+            if [ -f "$source_file" ]; then
+                local file_name=$(basename "$source_file")
+                local destination_file="$destination_path/$file_name"
+
+                if [ -e "$destination_file" ]; then
+                    local source_mod_time=$($stat_command "$source_file")
+                    local time_difference=$((current_time - source_mod_time))
+
+                    # Compare modification time, if the file was modified within the secure_backup_interval
+                    if [ "$time_difference" -ge "$secure_backup_interval" ]; then
+                        local dest_mod_time=$($stat_command "$destination_file")
+
+                        # If the source file has been modified since the last secure_backup_interval
+                        if [ "$source_mod_time" -gt "$dest_mod_time" ]; then
+                            local timestamp=$(date +"%Y%m%d%H%M%S")
+                            local secure_backup_name="${file_name}_safesync_secure_bkp_${timestamp}"
+
+                            local secure_backup_destination="$destination_path/$secure_backup_name"
+                            mv "$destination_file" "$secure_backup_destination"
+                            echo -e "[ $(date) ] - ( INFO ) : Secure Backup Taken. Renamed: $file_name -> $secure_backup_name" | log_this
+                        fi
+                    fi
+                fi
+            fi
+        done
+    fi
+}
+

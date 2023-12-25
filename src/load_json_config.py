@@ -18,6 +18,7 @@ create_dirs = config_data['create_dirs']
 log_destination = config_data['log_destination']
 python_command = config_data['python_command']
 rsync_log = config_data['rsync_log']
+secure_backup_interval = config_data['secure_backup_interval']
 
 
 # Print variables in a format suitable for Bash
@@ -28,3 +29,5 @@ print(f"create_dirs={create_dirs}")
 print(f"log_destination={log_destination}")
 print(f"python_command={python_command}")
 print(f"rsync_log={rsync_log}")
+print(f"secure_backup_interval={secure_backup_interval}")
+

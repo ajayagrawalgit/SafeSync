@@ -1,9 +1,10 @@
 {
     "backup_interval": 10,
-    "backup_list": "/Users/ajay.agrawal/Documents/MyLab/TestScripts/SS/SafeSync/config/backup_list.txt",
-    "exceptions": [".xml", ".html"],
-    "create_dirs": "false",
-    "log_destination": "/Users/ajay.agrawal/Documents/MyLab/TestScripts/SS/SafeSync/logs/safesync.log",
-    "rsync_log": "/Users/ajay.agrawal/Documents/MyLab/TestScripts/SS/SafeSync/logs/rsync.log",
-    "python_command": "python3"
+    "backup_list": "/path/to/backup_list.txt",
+    "exceptions": [".xml", ".html", ".yaml"],
+    "create_dirs": "true",
+    "log_destination": "/path/to/logs/safesync.log",
+    "rsync_log": "/path/to/logs/rsync.log",
+    "python_command": "python3",
+    "secure_backup_interval": 20
 }

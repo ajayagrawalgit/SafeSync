@@ -42,9 +42,11 @@ function safesync_logic() {
                 # Create the destination directory, including parent directories if necessary
                 echo -e "[ $(date) ] - ( INFO ) : create_dirs=true. Hence, Creating $destination_path with Parent Directories as required." | log_this
                 mkdir -p "$destination_path"
+                secure_backup "$source_path" "$destination_path" "$secure_backup_interval"
                 rsync_output=$(rsync "${rsync_options[@]}" "$source_path" "$destination_path" 2>&1)
             else
                 echo -e "[ $(date) ] - ( INFO ) : create_dirs=false. Hence, Not creating $destination_path with any additional directories." | log_this
+                secure_backup "$source_path" "$destination_path" "$secure_backup_interval"
                 rsync_output=$(rsync "${rsync_options[@]}" "$source_path/" "$destination_path" 2>&1)
             fi
 
